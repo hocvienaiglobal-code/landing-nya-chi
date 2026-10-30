@@ -79,6 +79,9 @@
     @media(max-width:900px){.hero h1{font-size:clamp(38px,7vw,52px)}.hero-urgency{margin-inline:auto;text-align:left}.hero-visual{width:min(100%,480px);margin-inline:auto;padding:12px 0 16px}.portrait-frame img{height:100%}}
     @media(max-width:680px){.hero-grid{gap:38px}.hero h1{font-size:clamp(34px,10.2vw,40px);line-height:1.15}.hero h1 span{padding:.07em .02em .09em}.hero-urgency{width:100%;padding:12px 10px 11px}.countdown-grid{gap:5px}.countdown-unit{padding-inline:2px}.countdown-value{font-size:22px}.countdown-label{font-size:7px;letter-spacing:.07em}.seat-availability{justify-content:center;font-size:10px}.hero-visual{width:min(100%,420px);padding:8px 0 12px}.portrait-frame img{height:100%}}
     @media(max-width:390px){.hero h1{font-size:31.5px}}
+    /* 16. RESPONSIVE HARDENING */
+    .aurora{overflow:clip}
+    @media(max-width:680px){body{padding-bottom:calc(70px + env(safe-area-inset-bottom))}.benefits-grid{grid-template-columns:1fr}.benefit-card{min-height:0}.mobile-sticky{display:flex;align-items:center;justify-content:center;padding:8px max(16px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}.mobile-sticky .btn{width:min(88%,300px);max-width:100%;min-width:0;min-height:44px;margin-inline:auto;padding:8px 16px;box-sizing:border-box;font-size:11px;line-height:1.2;white-space:nowrap;touch-action:manipulation}.final-panel .final-primary{width:min(100%,320px);max-width:100%;margin-inline:auto}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.js .reveal{opacity:1;transform:none}}
   </style>
   <script>document.documentElement.classList.add("js");</script>
