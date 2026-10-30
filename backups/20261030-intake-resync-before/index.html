@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khóa học xây page Reels triệu view tự động | Cô Nga Master AI</title>
+<meta name="description" content="Bản clone v2 sát giao diện trang gốc của bạn: thanh thông báo, header xanh đậm, hero 2 cột ảnh vòm, nút vàng kem, thứ tự section gốc. Ảnh hiện đang trỏ tới thư mục assets trên trang gốc của bạn — khi host chính thức, copy ảnh về thư mục assets/ của bản này.">
+<style>
+:root{--green:#123f35;--green2:#0d2f28;--cream:#f5e9c8;--cream2:#faf6e9;--cream3:#efe0ae;--text:#1d2b27;--muted:#5a6b66;--border:#e2dcc2;--white:#fff}
+*{box-sizing:border-box} body{margin:0;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.6}
+a{color:inherit} .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.topbar{background:var(--cream);text-align:center;padding:9px 16px;font-size:14px;font-weight:700;letter-spacing:.04em}
+.topbar a{color:var(--green)}
+header.site{background:var(--green);color:#fff;position:sticky;top:0;z-index:20}
+.head{display:flex;justify-content:space-between;align-items:center;padding:14px 0;gap:16px}
+.logo{font-weight:900;letter-spacing:.05em} .logo small{display:block;font-size:11px;letter-spacing:.18em;font-weight:600;opacity:.85}
+nav{display:flex;gap:14px;font-size:13px;flex-wrap:nowrap} nav a{text-decoration:none;opacity:.9;white-space:nowrap}
+.btn{display:inline-block;background:var(--cream);color:var(--green);padding:13px 24px;border-radius:12px;text-decoration:none;font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:.02em}
+.btn{border:0;cursor:pointer;font-family:inherit}
+.btn.dark{background:var(--green);color:#fff} .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text);text-transform:none}
+.hero{background:var(--green);color:#fff;padding:44px 0 52px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start}
+.eyebrow{font-size:13px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;opacity:.9}
+h1{font-size:54px;line-height:1.05;margin:14px 0;text-transform:uppercase}
+h1 .y{color:var(--cream)} h2{font-size:30px;line-height:1.25;margin:0 0 10px} h3{font-size:18px;margin:0 0 6px}
+.leadbox{border-left:4px solid var(--cream3);padding-left:16px;margin:18px 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap} .chip{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:5px 14px;font-size:13px}
+.pill{display:inline-block;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:6px 14px;font-size:13px;margin:14px 0}
+.hero img.main{width:100%;height:520px;object-fit:cover;border-radius:220px 220px 18px 18px;display:block}
+.mini{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+.mini div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 14px;font-size:14px}
+section{padding:52px 0} section.cream{background:var(--cream2)} section.green{background:var(--green);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.grid.two{grid-template-columns:repeat(2,1fr)} .grid.five{grid-template-columns:repeat(5,1fr)}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+section.green .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);color:#fff}
+.card img{width:100%;border-radius:12px;display:block;object-fit:cover}
+.num{width:38px;height:38px;border-radius:50%;background:var(--cream);color:var(--green);display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+.stat{font-size:30px;font-weight:900} .muted{color:var(--muted);font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px} .tag{background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 12px;font-size:13px}
+details{border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin:10px 0;background:#fff}
+summary{font-weight:700;cursor:pointer}
+.poster{max-width:640px;margin:0 auto 20px} .poster img{width:100%;border-radius:16px}
+.qrbox{background:#fff;color:var(--text);border-radius:16px;padding:20px;text-align:center}
+.qrbox img{max-width:220px;margin:0 auto}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.final-grid img{width:100%;border-radius:18px;height:420px;object-fit:cover}
+.media-video{width:100%;display:block;background:#000;aspect-ratio:16/9;object-fit:contain}
+.feedback-grid .card,.training-gallery .card{padding:10px;overflow:hidden}
+.feedback-grid img{width:100%;height:560px;object-fit:contain;background:var(--cream2)}
+.training-gallery img{width:100%;height:320px;object-fit:cover}
+.contact-panel{max-width:760px;margin:0 auto;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:30px}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.form-field{display:flex;flex-direction:column;gap:7px}.form-field:first-child{grid-column:1/-1}
+.form-field label{font-weight:700}.form-field input{width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.35);border-radius:10px;background:#fff;color:var(--text);font:inherit}
+.form-actions{grid-column:1/-1;margin-top:4px}.form-note{font-size:13px;opacity:.8;margin:14px 0 0}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--green);color:#fff;z-index:30}
+.sticky .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 20px}
+body{padding-bottom:66px}
+@media(max-width:800px){h1{font-size:34px}.hero-grid,.final-grid,.contact-form{grid-template-columns:1fr}.grid,.grid.two,.grid.five{grid-template-columns:1fr}nav{display:none}.hero img.main{height:380px}.final-grid img{height:300px}.feedback-grid img{height:auto;max-height:620px}.training-gallery img{height:240px}.form-field:first-child{grid-column:auto}.form-actions{grid-column:auto}.contact-panel{padding:22px}}
+</style>
+</head>
+<body>
+<div class="topbar">15 CHIẾN LƯỢC XÂY DỰNG TÀI SẢN SỐ TRIỆU ĐÔ &nbsp; <a href="#lien-he">Để lại thông tin ↓</a></div>
+<header class="site"><div class="wrap head"><div class="logo">MASTER VÂN TRANG<small>MASTER COACH · ỨNG DỤNG AI KINH DOANH THỰC CHIẾN</small></div>
+<nav><a href="#dang-mac">Bạn đang mắc ở đâu?</a><a href="#ve-van-trang">Về Vân Trang</a><a href="#lo-trinh">Lộ trình học</a><a href="#video-mau">Video mẫu</a></nav>
+<a class="btn" href="#lien-he">Để lại thông tin</a></div></header>
+
+<main>
+<section class="hero" style="padding-top:36px">
+<div class="wrap hero-grid"><div>
+<p class="eyebrow">Khóa phễu cùng Master Vân Trang</p>
+<h1>15 Chiến Lược<br><span class="y">Xây Dựng<br>Tài Sản Số<br>Triệu Đô</span></h1>
+<div class="leadbox"><p style="margin:0 0 10px"><strong>Dễ dàng nhân bản hệ thống hàng chục đến hàng trăm kênh đa nền tảng.</strong></p>
+<div class="chips"><span class="chip">Facebook</span><span class="chip">TikTok</span><span class="chip">YouTube</span></div>
+<p style="font-size:14px;opacity:.85;margin:10px 0 0">Chuẩn hóa quy trình để từng bước mở rộng theo nguồn lực và công cụ của bạn.</p></div>
+<p>Cả buổi làm một video, đăng rồi vẫn ít người xem… Bạn muốn xây kênh để khách biết đến mình, nhưng cứ mắc ở kỹ thuật và không biết phải sửa từ đâu?</p>
+<p><strong>Vào lớp Zoom miễn phí cùng Nga.</strong> Xem demo công cụ làm video tự động và quy trình xây kênh, để biết mình bắt đầu ở đâu và bớt loay hoay với từng thao tác.</p>
+<span class="pill">Lớp học miễn phí qua Zoom · Còn 68 suất</span><br>
+<a class="btn" href="#lien-he">Để lại thông tin</a>
+<p style="font-size:14px;margin-top:14px"><a href="#lien-he">Mở form liên hệ</a> &nbsp;·&nbsp; <a href="#demo-lam-video-tu-dong">Xem demo app làm video tự động</a></p>
+<p style="font-weight:800;letter-spacing:.06em">CHỈ CẦN BIẾT CHỮ LÀ CÓ THỂ BẮT ĐẦU.</p>
+</div><div>
+<img class="main" src="assets/giang-vien/giang-vien-1.png" alt="Master Vân Trang">
+<div class="mini"><div><strong>Không phải tự viết kịch bản</strong><br>App hỗ trợ xây nội dung từ ý tưởng</div>
+<div><strong>Video dài, nhiều thể loại</strong><br>Phim · Chuyên gia · Review · Nhiều ngành</div>
+<div><strong>Chăm page Reels triệu view bằng AI Auto 360</strong><br>Nội dung · Lịch đăng · Tương tác</div></div>
+</div></div>
+</section>
+
+<section class="cream" id="ve-van-trang"><div class="wrap">
+<div class="hero-grid"><div class="card" style="padding:0;overflow:hidden"><img src="assets/giang-vien/giang-vien-1.png" alt="Master Vân Trang" style="height:420px"><div style="padding:20px;background:var(--green);color:#fff"><p class="eyebrow">Master Coach · Ứng dụng AI kinh doanh thực chiến</p><h3>MASTER VÂN TRANG</h3><p style="margin:0">Khoảng 16 năm kinh doanh thực chiến và điều hành doanh nghiệp<br>Đào tạo chuẩn hóa pháp lý cho hơn 10.000 học viên ngành làm đẹp và kinh doanh</p></div></div>
+<div><p class="eyebrow">Giới thiệu Master Vân Trang</p><h2>Master Coach — Ứng dụng AI kinh doanh thực chiến</h2>
+<p>Khoảng 16 năm kinh doanh thực chiến và điều hành doanh nghiệp.</p>
+<h3>Đào tạo chuẩn hóa pháp lý cho hơn 10.000 học viên</h3>
+<p>Đơn vị tiên phong chuẩn hóa pháp lý, cung cấp chứng chỉ ngành AI.</p>
+<blockquote style="border-left:4px solid var(--cream3);padding-left:16px;font-weight:700">Năng lượng – Trách nhiệm – Thực chiến – Học tạo ra kết quả ngay lập tức.</blockquote>
+<a class="btn dark" href="#lien-he">Để lại thông tin</a></div></div>
+</div></section>
+
+<section><div class="wrap"><p class="eyebrow">Từ kinh nghiệm đến nội dung thực tế</p><h2>Từ ý tưởng đến những nội dung được đón nhận.</h2>
+<div class="grid">
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/kenh-co-nga-master-ai.jpeg" alt="Kênh Cô Nga Master AI"><p><strong>Facebook · Phim Drama</strong></p><h3>Cô Nga Master Ai</h3><p><span class="stat">33K</span> người theo dõi<br>Reel hiển thị <strong>1,3 triệu</strong> lượt xem</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/kenh-co-nga-ai-thuc-chien.jpeg" alt="Kênh Cô Nga AI Thực Chiến"><p><strong>Facebook · AI Thực Chiến</strong></p><h3>Cô Nga Ai Thực Chiến</h3><p><span class="stat">4,8K</span> người theo dõi<br>Reel hiển thị <strong>130K</strong> lượt xem</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/kenh-nga-villa.jpeg" alt="Kênh bất động sản của cô Nga"><p><strong>TikTok · Bất động sản</strong></p><h3>Kênh bất động sản của cô Nga</h3><p><span class="stat">15,2K</span> người theo dõi<br>Video hiển thị <strong>895,9K</strong> lượt xem</p></div>
+</div><p class="muted">Số liệu theo ba ảnh chụp do cô Nga cung cấp ngày 26/10/2026, tại thời điểm chụp; không phải bộ đếm trực tiếp. Đây là kết quả trên các kênh của cô Nga, không phải cam kết lượt xem hay thu nhập của học viên.</p>
+</div></section>
+
+<section class="cream"><div class="wrap"><p class="eyebrow">Feedback từ lớp học Zoom</p><h2>Học viên nói gì về Master Vân Trang?</h2>
+<div class="card" style="padding:0;overflow:hidden"><video class="media-video" controls preload="metadata" playsinline aria-label="Video học viên chia sẻ đánh giá về Master Vân Trang"><source src="assets/videos/video-1.mp4" type="video/mp4">Trình duyệt của bạn không hỗ trợ video MP4.</video><div style="padding:20px"><p><strong>Video ghi hình buổi học Zoom, học viên chia sẻ đánh giá về Master Vân Trang.</strong></p></div></div>
+</div></section>
+
+<section id="dang-mac"><div class="wrap"><p class="eyebrow">Có phải bạn cũng đã từng như vậy?</p><h2>Ngày nào cũng bận làm nội dung. Nhưng khách vẫn chưa biết bạn là ai.</h2>
+<p>Thức khuya làm video. Sửa đi sửa lại. Đăng lên rồi chờ… vẫn ít người xem, chưa có ai hỏi. Ngày mai lại phải nghĩ bài mới.</p>
+<div class="grid"><div class="card"><h3>Hết buổi tối, chưa xong một video.</h3><p>Mở máy với ý định làm một video, rồi mắc ở câu mở đầu, sửa giọng đọc, tạo lại cảnh lỗi, ghép đi ghép lại.</p></div>
+<div class="card"><h3>Đăng rồi im lặng. Càng làm, càng mất tự tin.</h3><p>Đăng rồi lại mở điện thoại xem có ai xem, ai bình luận chưa. Lượt xem ít, khách chưa hỏi.</p></div>
+<div class="card"><h3>Học hết hướng dẫn này đến hướng dẫn khác. Vẫn chưa tự làm được.</h3><p>Xem người khác thao tác thấy dễ. Tự làm mới biết thiếu một bước là đứng lại.</p></div>
+<div class="card"><h3>Có nghề, có điều muốn chia sẻ… nhưng kênh cứ nằm im.</h3><p>Bạn hiểu sản phẩm của mình, nhưng ngại lên hình, sợ nói không hay, sợ bấm sai.</p></div>
+<div class="card"><h3>Mua thêm công cụ mà công việc chưa nhẹ hơn.</h3><p>Thêm một khoản phí mỗi tháng, thêm một ứng dụng phải học, trong khi chưa có quy trình.</p></div>
+<div class="card"><h3>Muốn làm đều, nhưng không thể ngày nào cũng thức khuya.</h3><p>Ban ngày lo khách, tối lo gia đình, lúc rảnh mới ngồi làm nội dung. Đăng được vài hôm rồi lại ngắt.</p></div></div>
+<div style="text-align:center;margin-top:28px"><p style="font-weight:800;letter-spacing:.06em">CHỈ CẦN BIẾT CHỮ, BẠN CÓ THỂ BẮT ĐẦU.</p><p><strong>Vào học với cô Nga ngay — lớp Zoom miễn phí!</strong></p><a class="btn dark" href="#lien-he">Để lại thông tin</a></div>
+</div></section>
+
+<section class="cream"><div class="wrap"><p class="eyebrow">Anh chị sẽ được gì sau khóa học?</p><h2>Xây page Reels triệu view tự động. Học để tự tay vận hành.</h2>
+<div class="grid"><div class="card"><div class="num">01</div><h3>Video hàng loạt</h3><p><strong>Một ý tưởng. Hàng loạt video.</strong> Nhập một ý tưởng để AI phát triển kịch bản, chia cảnh và tự động sản xuất video; bạn duyệt và chỉnh trước khi đăng.</p></div>
+<div class="card"><div class="num">02</div><h3>Chăm page tự động</h3><p><strong>AI đăng bài, tương tác và chăm khách.</strong> Thiết lập hệ thống hỗ trợ đăng theo lịch, phản hồi bình luận và chăm inbox trên tài khoản đã kết nối.</p></div>
+<div class="card"><div class="num">03</div><h3>Hệ thống nhiều page</h3><p><strong>Từ một page đến hệ thống nhiều page.</strong> Chuẩn hóa nội dung và quy trình để mở rộng dần khi đủ nguồn lực và công cụ.</p></div>
+<div class="card"><div class="num">04</div><h3>Bot &amp; app riêng</h3><p><strong>Tự tay tạo bot, app theo mục tiêu.</strong> Bắt đầu từ một nhu cầu cụ thể, tạo công cụ đơn giản và kiểm tra trước khi dùng.</p></div>
+<div class="card"><div class="num">05</div><h3>Thời gian &amp; chi phí</h3><p><strong>Bớt việc lặp lại. Tối ưu hiệu suất.</strong> Đo thời gian làm nội dung, tính phí công cụ và chuẩn hóa thao tác.</p></div></div>
+</div></section>
+
+<section><div class="wrap"><p class="eyebrow">Kênh học viên · Cô Nga chia sẻ</p><h2>Bạn nghĩ phải làm thật lâu mới có triệu lượt xem?</h2>
+<p>Có thể điều bạn đang thiếu là một công thức rõ ràng để bắt đầu và một quy trình để làm đều.</p>
+<div class="grid two">
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/hoc-vien-nha-co-chuyen-v23.jpg" alt="Kênh học viên Nhà Có Chuyện"><h3>Nhà Có Chuyện</h3><p><span class="stat">558K</span> lượt xem trên một video trong ảnh; các video khác trên ảnh có 167K, 49K và 28K lượt xem.</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/hoc-vien-chuyen-nha-moi-ngay-v23.jpg" alt="Kênh học viên Chuyện Nhà Mỗi Ngày"><h3>Chuyện Nhà Mỗi Ngày</h3><p><span class="stat">858K</span> lượt xem trên một video trong ảnh; các video khác trên ảnh có 54K, 15K và 10K lượt xem.</p></div>
+</div><p class="muted">Ảnh chụp nguyên bản do cô Nga cung cấp, giữ nguyên số lượt xem. Kết quả từng học viên khác nhau.</p>
+</div></section>
+
+<section class="cream"><div class="wrap"><p class="eyebrow">Từ buổi học đến thực hành</p><h2>Những bước tiến được học viên chia sẻ cùng cô Nga.</h2>
+<div class="grid" hidden aria-hidden="true"><div class="card"><div style="background:var(--cream);border-radius:12px;padding:40px;text-align:center">Ảnh kết quả học viên 1<br><small>URL ảnh gốc chưa trích xuất được trong lần kiểm tra — thay bằng file ảnh của bạn khi host chính thức</small></div></div>
+<div class="card"><div style="background:var(--cream);border-radius:12px;padding:40px;text-align:center">Ảnh kết quả học viên 2</div></div>
+<div class="card"><div style="background:var(--cream);border-radius:12px;padding:40px;text-align:center">Ảnh kết quả học viên 3</div></div></div>
+<details hidden aria-hidden="true"><summary>Xem thêm 7 ảnh kết quả học viên ↓</summary><p>Thêm 7 ảnh kết quả tại đây khi bạn có đủ file ảnh gốc.</p></details>
+<div class="grid" style="margin-top:16px"><div class="card"><h3>Bắt đầu bằng giá trị thật</h3><p>Chọn một việc khách đang cần, làm một sản phẩm nhỏ rồi đem ra giới thiệu và nhận phản hồi.</p></div>
+<div class="card"><h3>Thực hành để biết mình làm được</h3><p>Từ nội dung đến video, công cụ hoặc dịch vụ: làm thử, kiểm tra chất lượng và cải thiện từng bước.</p></div>
+<div class="card"><h3>Có giao dịch, tiếp tục tính hiệu quả</h3><p>Tiền khách chuyển chưa phải lợi nhuận. Cần tính cả phí công cụ, thời gian làm, hỗ trợ và hoàn tiền nếu có.</p></div></div>
+<p class="muted">Ảnh chụp kết quả do cô Nga cung cấp, giữ nguyên nội dung và số tiền. Một số ảnh có thể trùng giao dịch; không cộng thành tổng doanh thu hoặc lợi nhuận.</p>
+</div></section>
+
+<section><div class="wrap"><p class="eyebrow">Lời chia sẻ từ học viên</p><h2>Cảm nhận từ học viên</h2>
+<div class="grid feedback-grid"><div class="card"><img src="assets/feedback/feedback-1.PNG" alt="Cảm nhận học viên về Master Vân Trang 1" loading="lazy"></div>
+<div class="card"><img src="assets/feedback/feedback-2.JPG" alt="Cảm nhận học viên về Master Vân Trang 2" loading="lazy"></div>
+<div class="card"><img src="assets/feedback/feedback-3.JPG" alt="Cảm nhận học viên về Master Vân Trang 3" loading="lazy"></div></div>
+</div></section>
+
+<section class="cream" id="lo-trinh"><div class="wrap" style="text-align:center"><p class="eyebrow">Chương trình · Học miễn phí qua Zoom</p><h2>Xây page Reels triệu view tự động.</h2>
+<div class="poster"><a href="#lien-he"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/chuong-trinh-reels-mien-phi-v20.webp" alt="Poster chương trình Xây page Reels triệu view tự động — Chỉ còn 68 suất học miễn phí qua Zoom"></a></div>
+<p><span class="chip" style="background:#fff">Học miễn phí qua Zoom</span> <span class="chip" style="background:#fff">8 nội dung thực chiến</span> <span class="chip" style="background:#fff">Còn 68 suất</span></p>
+<ol style="text-align:left;max-width:760px;margin:24px auto">
+<li><strong>AI vỡ lòng</strong> — Làm quen công cụ, biết cách giao việc cho AI và hoàn thành từng thao tác cơ bản.</li>
+<li><strong>Xây page Reels hướng tới triệu view</strong> — Chọn ngách, xác định người xem, xây ý tưởng và tổ chức nội dung nhất quán.</li>
+<li><strong>Tự tạo bot &amp; nhà máy video hàng loạt</strong> — Từ một ý tưởng, tạo bot và app hỗ trợ kịch bản, sản xuất hàng loạt video cho ngành của bạn.</li>
+<li><strong>Làm chủ công cụ tự động hóa</strong> — Kết nối các bước làm nội dung, lên lịch đăng và chăm tương tác, có bước kiểm tra và duyệt.</li>
+<li><strong>Tạo offer giá cao · Chốt deal</strong> — Thiết kế gói giải pháp có giá trị rõ ràng, tính chi phí và thời gian, luyện cách tư vấn.</li>
+<li><strong>Đóng gói &amp; chuyển giao công nghệ</strong> — Chuẩn hóa sản phẩm, hướng dẫn sử dụng và quy trình bàn giao.</li>
+<li><strong>Chọn ngách &amp; xây hệ thống bán hàng riêng</strong> — Xây nội dung, sản phẩm và hành trình tư vấn theo thế mạnh của bạn.</li>
+<li><strong>Thực hành để tạo kết quả từ hệ thống</strong> — Hoàn thiện sản phẩm, kiểm tra vận hành và theo dõi phản hồi thực tế.</li>
+</ol>
+<p><strong>Chỉ còn 68 suất học miễn phí qua Zoom</strong></p>
+<a class="btn dark" href="#lien-he">Để lại thông tin</a>
+<p class="muted">Vào nhóm Zalo của Nga để nhận lịch Zoom và hướng dẫn tham gia lớp học miễn phí. Chi phí công cụ hoặc chương trình chuyên sâu, nếu có, được thông báo riêng. Kết quả phụ thuộc vào việc thực hành; không cam kết lượt xem hoặc thu nhập.</p>
+</div></section>
+
+<section><div class="wrap"><p class="eyebrow">Quy trình xây page Reels triệu view tự động của Cô Nga</p><h2>Từ ý tưởng đến video. Từ video đến một page Reels triệu view được chăm đều.</h2>
+<div class="grid"><div class="card"><div class="num">01</div><h3>Chọn ngách &amp; hướng nội dung</h3><p><strong>Bắt đầu đúng người xem.</strong> Xác định ngành, đối tượng, mục tiêu và kênh mẫu.</p></div>
+<div class="card"><div class="num">02</div><h3>Nhập ý tưởng, app lo kịch bản</h3><p><strong>Không cần tự viết từ đầu.</strong> Chọn thể loại, chủ đề, nhân vật và thời lượng.</p></div>
+<div class="card"><div class="num">03</div><h3>Sản xuất video tự động đa thể loại</h3><p><strong>Video ngắn &amp; video dài.</strong> Drama, phim trẻ em, phong thủy, chuyên gia, review và nhiều ngành.</p></div>
+<div class="card"><div class="num">04</div><h3>Duyệt thành phẩm &amp; chuẩn bị đăng</h3><p><strong>Giữ chất lượng và dấu ấn riêng.</strong> Kiểm tra hình, tiếng, nhân vật, phụ đề và thông điệp.</p></div>
+<div class="card"><div class="num">05</div><h3>AI Auto 360 hỗ trợ chăm page</h3><p><strong>Nội dung · Lịch đăng · Tương tác.</strong> Tổ chức nội dung, đăng theo lịch, hỗ trợ trả lời bình luận và inbox trên kênh đã kết nối.</p></div></div>
+</div></section>
+
+<section class="cream" id="video-mau"><div class="wrap"><p class="eyebrow">Các dạng video sản xuất tự động</p><h2>Một ý tưởng của anh chị. Hàng loạt video cho ngành nghề của mình.</h2>
+<div class="chips" style="margin:14px 0"><span class="chip" style="background:#fff">Tất cả · 16</span><span class="chip" style="background:#fff">Bác sĩ &amp; phòng khám</span><span class="chip" style="background:#fff">Bất động sản</span><span class="chip" style="background:#fff">Sản phẩm &amp; bán hàng</span><span class="chip" style="background:#fff">Công nghệ &amp; app</span><span class="chip" style="background:#fff">Phim &amp; drama</span><span class="chip" style="background:#fff">Trẻ em &amp; gia đình</span><span class="chip" style="background:#fff">Chuyên gia &amp; thương hiệu</span></div>
+<div class="grid"><div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-bac-si-phong-kham.jpg" alt="Video mẫu bác sĩ và phòng khám"><p>Video mẫu · Bác sĩ &amp; phòng khám</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-gioi-thieu-du-an.jpg" alt="Video mẫu giới thiệu dự án"><p>Video mẫu · Bất động sản</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-gioi-thieu-san-pham.jpg" alt="Video mẫu giới thiệu sản phẩm"><p>Video mẫu · Sản phẩm &amp; bán hàng</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-ai-video-da-nganh.jpg" alt="Video mẫu đa ngành"><p>Video mẫu · Công nghệ &amp; app</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-drama-hien-dai.jpg" alt="Video mẫu drama"><p>Video mẫu · Phim &amp; drama</p></div>
+<div class="card"><img src="https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/sample-em-be-gia-dinh.jpg" alt="Video mẫu em bé và gia đình"><p>Video mẫu · Trẻ em &amp; gia đình</p></div></div>
+<p><button class="btn ghost">Xem thêm 10 video mẫu</button></p>
+<h3 style="margin-top:28px">Tự động hóa sản xuất video hàng loạt theo ý tưởng</h3>
+<p><strong>Anh chị làm ngành nào, bắt đầu từ ý tưởng của ngành đó.</strong> Hệ thống được thiết kế để tùy biến cho nhiều ngành nghề, từ một ý tưởng phát triển thành chuỗi kịch bản và video theo từng sản phẩm, nhóm khách hàng hoặc mục tiêu.</p>
+<div class="tags"><span class="tag">Bất động sản &amp; môi giới</span><span class="tag">Kiến trúc &amp; nội thất</span><span class="tag">Xây dựng &amp; vật liệu</span><span class="tag">Mỹ phẩm &amp; chăm sóc da</span><span class="tag">Spa &amp; dịch vụ làm đẹp</span><span class="tag">Thời trang &amp; phụ kiện</span><span class="tag">Trang sức &amp; đồng hồ</span><span class="tag">Bán lẻ &amp; thương mại điện tử</span><span class="tag">Nhà hàng, quán ăn &amp; cà phê</span><span class="tag">Thực phẩm &amp; đồ uống</span><span class="tag">Nông nghiệp &amp; nông sản</span><span class="tag">Du lịch &amp; lữ hành</span><span class="tag">Khách sạn &amp; homestay</span><span class="tag">Giáo dục &amp; gia sư</span><span class="tag">Đào tạo, coaching &amp; tư vấn</span><span class="tag">Công nghệ, phần mềm &amp; app</span><span class="tag">Marketing &amp; dịch vụ sáng tạo</span><span class="tag">Tài chính, kế toán &amp; bảo hiểm</span><span class="tag">Pháp lý &amp; dịch vụ doanh nghiệp</span><span class="tag">Bác sĩ &amp; phòng khám</span><span class="tag">Sức khỏe &amp; chăm sóc cá nhân</span><span class="tag">Thể thao, yoga &amp; fitness</span><span class="tag">Mẹ bé &amp; gia đình</span><span class="tag">Ô tô, xe máy &amp; phụ tùng</span><span class="tag">Điện máy &amp; đồ gia dụng</span><span class="tag">Vận tải &amp; logistics</span><span class="tag">Thú cưng &amp; dịch vụ thú y</span><span class="tag">Thủ công &amp; quà tặng</span><span class="tag">Nghệ thuật &amp; giải trí</span><span class="tag">Phim ngắn, drama &amp; hoạt hình</span><span class="tag">Sự kiện, cưới hỏi &amp; lễ hội</span><span class="tag">Tuyển dụng &amp; nhân sự</span><span class="tag">Sản xuất &amp; công nghiệp</span><span class="tag">Dịch vụ tại địa phương</span><span class="tag">Văn hóa &amp; phong thủy</span><span class="tag">Thương hiệu cá nhân &amp; chuyên gia</span></div>
+</div></section>
+
+<section id="demo-lam-video-tu-dong"><div class="wrap"><p class="eyebrow">App sản xuất video tự động</p><h2>Bạn giao một ý tưởng. Một quy trình lo từng công đoạn.</h2>
+<div class="grid"><div class="card"><div class="num">1</div><h3>Tạo app đầu tiên</h3><p>Bắt đầu từ một nhu cầu cụ thể của bạn.</p></div>
+<div class="card"><div class="num">2</div><h3>Tùy biến cho ngành mình</h3><p>Chọn thể loại, nhân vật và phong cách phù hợp ngành.</p></div>
+<div class="card"><div class="num">3</div><h3>Nhân bản &amp; kiểm tra</h3><p>Kiểm tra thành phẩm trước khi đăng hoặc nhân bản.</p></div></div>
+<div class="card" style="margin-top:20px;text-align:center"><p class="eyebrow">Demo thao tác thực tế · 3 phút</p><h3>Xem demo app làm video tự động</h3><p>Từ ảnh nhân vật đến kết quả MP4.</p><a class="btn dark" href="https://drive.google.com/file/d/11SU386E_S5dhgeyIAo5GziVGGZ-uS7IT/view?usp=drivesdk">Mở video hướng dẫn trên Google Drive ↗</a></div>
+</div></section>
+
+<section class="cream" id="demo-ai-auto-360" hidden aria-hidden="true"><div class="wrap"><p class="eyebrow">AI Auto 360 · Nội dung, xuất bản &amp; chăm khách</p><h2>Làm nội dung. Đăng theo lịch. Chăm tương tác trong cùng một quy trình.</h2>
+<div class="grid"><div class="card"><div class="num">01</div><h3>Cấu hình thương hiệu riêng</h3><p>Ngành nghề, khách hàng, giọng văn, ảnh nhận diện và lời mời hành động.</p></div>
+<div class="card"><div class="num">02</div><h3>Nghiên cứu &amp; lên chủ đề</h3><p>Đề xuất góc nội dung, chủ đề, định dạng và kế hoạch theo ngày.</p></div>
+<div class="card"><div class="num">03</div><h3>Viết bài theo từng mục tiêu</h3><p>Mở đầu, tiêu đề, caption và hashtag cho từng dạng bài.</p></div>
+<div class="card"><div class="num">04</div><h3>Tạo ảnh, carousel &amp; ảnh bìa</h3><p>Ảnh bài đăng, bộ ảnh nhiều trang, cover Reels và thumbnail.</p></div>
+<div class="card"><div class="num">05</div><h3>Tích hợp quy trình video</h3><p>Điều phối viết kịch bản, chuẩn bị cảnh, tạo và biên tập video.</p></div>
+<div class="card"><div class="num">06</div><h3>Biên tập riêng cho từng nền tảng</h3><p>Điều chỉnh tiêu đề, caption và định dạng cho Facebook, TikTok, YouTube.</p></div>
+<div class="card"><div class="num">07</div><h3>Sắp xếp lịch theo từng kênh</h3><p>Tách rõ bản nháp, chờ duyệt và chờ đăng.</p></div>
+<div class="card"><div class="num">08</div><h3>Đăng hoặc lên lịch đã duyệt</h3><p>Thực hiện trên tài khoản đã kết nối và được cấp quyền.</p></div>
+<div class="card"><div class="num">09</div><h3>Trả lời bình luận theo ngữ cảnh</h3><p>Soạn câu trả lời phù hợp, tránh lặp cùng một ý.</p></div>
+<div class="card"><div class="num">10</div><h3>Chăm inbox &amp; tìm hiểu nhu cầu</h3><p>Làm rõ khách cần học AI, làm video hay dùng công cụ.</p></div>
+<div class="card"><div class="num">11</div><h3>Mời khách về đúng nhóm Zalo</h3><p>Gửi đường dẫn đã cấu hình khi phù hợp nhu cầu.</p></div>
+<div class="card"><div class="num">12</div><h3>Hỗ trợ hoạt động cộng đồng</h3><p>Chuẩn bị nội dung và đăng chéo trong các nhóm có quyền.</p></div>
+<div class="card"><div class="num">13</div><h3>Chuẩn hóa hệ thống nhiều kênh</h3><p>Tổ chức cấu hình và lịch riêng theo tài khoản.</p></div>
+<div class="card"><div class="num">14</div><h3>Ghi nhận công việc đã hoàn thành</h3><p>Tách rõ đã làm nội dung, đã tạo video, đã lên lịch, đã đăng.</p></div>
+<div class="card"><div class="num">15</div><h3>Đọc dữ liệu &amp; đề xuất cải thiện</h3><p>Tổng hợp phản hồi để người quản lý quyết định.</p></div></div>
+<p style="margin-top:20px"><strong>Tự động hóa bắt đầu từ một lần giao việc rõ:</strong> 01 Thiết lập thương hiệu → 02 Giao mục tiêu → 03 AI chuẩn bị → 04 Duyệt &amp; thực thi → 05 Xem kết quả.</p>
+<div class="card" style="text-align:center"><p class="eyebrow">Video demo thực tế</p><h3>Xem AI Auto 360 hoạt động</h3><p>Từ câu lệnh đến công việc được thực hiện.</p><a class="btn dark" href="https://drive.google.com/file/d/1YES471ZMHINLscs4oewT4MobivCN3Qfv/view?usp=drivesdk">Mở video trên Google Drive ↗</a></div>
+<p class="muted">Đăng, lên lịch và gửi phản hồi chỉ thực hiện khi kênh có kết nối, có quyền và nằm trong phạm vi bạn giao. Khi thiếu kết nối, hệ thống chuẩn bị bản nháp.</p>
+</div></section>
+
+<section><div class="wrap"><p class="eyebrow">Đào tạo online và offline</p><h2>Hoạt động đào tạo cùng Master Vân Trang</h2>
+<div class="grid two training-gallery"><div class="card"><img src="assets/lop-hoc/lop-hoc-1.JPG" alt="Hoạt động đào tạo offline cùng Master Vân Trang 1" loading="lazy"></div>
+<div class="card"><img src="assets/lop-hoc/lop-hoc-2.JPG" alt="Hoạt động đào tạo offline cùng Master Vân Trang 2" loading="lazy"></div>
+<div class="card"><img src="assets/lop-hoc/lop-hoc-3.png" alt="Hoạt động đào tạo online cùng Master Vân Trang 1" loading="lazy"></div>
+<div class="card"><img src="assets/lop-hoc/lop-hoc-4.png" alt="Hoạt động đào tạo online cùng Master Vân Trang 2" loading="lazy"></div></div>
+</div></section>
+
+<section class="cream"><div class="wrap"><p class="eyebrow">FAQ</p><h2>Bạn hỏi — cô Nga giải đáp.</h2>
+<details><summary>Chưa biết AI, có tham gia được không?</summary><p>Có thể bắt đầu từ thao tác cơ bản. Bạn vẫn cần thiết bị, Internet và thời gian thực hành.</p></details>
+<details><summary>Có phải tự viết kịch bản không?</summary><p>App hỗ trợ tạo kịch bản từ chủ đề bạn nhập. Bạn xem lại, chỉnh nếu cần và duyệt trước khi sản xuất hoặc đăng.</p></details>
+<details><summary>Có làm được video dài và nhiều thể loại không?</summary><p>Quy trình hướng đến cả video ngắn và dài, nhiều thể loại. Giới hạn thời lượng và chi phí được làm rõ khi demo app.</p></details>
+<details><summary>Học xong có chắc chắn lên xu hướng không?</summary><p>Không có cam kết về lượt xem hay lên xu hướng. Kết quả phụ thuộc nội dung, người xem, nền tảng và quá trình thực hành.</p></details>
+<details><summary>Đăng ký miễn phí và nhận lịch học ở đâu?</summary><p>Nhấn nút đăng ký để vào nhóm Zalo của cô Nga. Lịch Zoom và hướng dẫn tham gia sẽ được thông báo trong nhóm.</p></details>
+</div></section>
+</main>
+
+<section class="green" id="lien-he"><div class="wrap">
+<div class="contact-panel"><p class="eyebrow">MASTER VÂN TRANG</p><h2>Để lại thông tin liên hệ</h2>
+<form class="contact-form" onsubmit="return false">
+<div class="form-field"><label for="contact-name">Họ và tên</label><input id="contact-name" name="name" type="text" autocomplete="name"></div>
+<div class="form-field"><label for="contact-phone">Số điện thoại</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+<div class="form-field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email"></div>
+<div class="form-actions"><button class="btn" type="button">Gửi thông tin</button></div>
+</form>
+<p class="form-note">Form đang ở giai đoạn giao diện và chưa gửi hoặc lưu dữ liệu.</p></div>
+</div>
+</section>
+
+<div class="sticky"><div class="wrap"><div><strong>MASTER VÂN TRANG</strong><br><small>15 Chiến Lược Xây Dựng Tài Sản Số Triệu Đô</small></div><a class="btn" href="#lien-he">Để lại thông tin</a></div></div>
+</body>
+</html>
