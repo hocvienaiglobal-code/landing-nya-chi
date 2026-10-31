@@ -1,48 +1,122 @@
-# Landing Reels Clone v2 — sát giao diện trang gốc của bạn
+# Landing Page Nya Chi
 
-Dựa trên kiểm tra trực quan trang gốc ngày 29/10/2026 (chỉ đọc, không bấm
-link, không đăng nhập, không tải tài nguyên trong lần kiểm tra đó).
+Landing Page tĩnh cho chương trình **XÂY KÊNH TRIỆU VIEW BẰNG AI**, kèm
+Vercel Function đăng ký học viên và Neon PostgreSQL.
 
-## Điểm khác v1, bám sát bản gốc hơn
+## Cấu trúc
 
-- Thanh thông báo vàng kem trên cùng + header xanh đậm + menu + nút vàng kem.
-- Hero xanh đậm 2 cột: văn bản trái, ảnh vòm phải, headline 3 dòng
-  trắng + vàng kem, khung dẫn có vạch vàng, chips nền tảng, pill 68 suất,
-  nút vàng kem, 3 thẻ nhỏ dưới ảnh hero.
-- Thứ tự section gốc: Về cô Nga (nền kem, thẻ ảnh xanh đậm) → Kênh của
-  cô Nga (3 thẻ) → Video giới thiệu 60 giây → Nỗi đau (6 thẻ) → Được gì
-  (5 thẻ) → Kênh học viên (2 thẻ) → Kết quả học viên → Cảm nhận →
-  Lộ trình 8 nội dung (poster) → Quy trình 5 bước → Video mẫu (6 thẻ +
-  bộ lọc + danh sách ngành) → App làm video (3 bước + demo Drive) →
-  AI Auto 360 (15 thẻ + 5 bước + demo Drive) → Cộng đồng (4 ảnh) →
-  FAQ (5 câu) → Chốt xanh đậm (ảnh vest hồng + QR + ô link) → Footer →
-  Thanh sticky cuối màn hình.
-- Nút CTA vàng kem, chữ xanh đậm, in hoa, có ↗, trỏ về cùng nhóm Zalo
-  của bạn như trang gốc. Link video Drive và Facebook cảm nhận cũng giữ
-  nguyên như trang gốc.
+- `index.html`: giao diện, validation phía trình duyệt và kết nối form.
+- `api/register.js`: `POST /api/register` trên Vercel.
+- `lib/registration.js`: validation server, chuẩn hóa số điện thoại, rate limit
+  và transaction đăng ký.
+- `db/schema.sql`: bảng `registrations` và `registration_rate_limits`.
+- `tests/registration.test.js`: kiểm thử tự động không cần database thật.
 
-## Lưu ý chưa xác định từ lần kiểm tra
+## Biến môi trường
 
-- Mã hex và tên font chính xác KHÔNG đọc được từ công cụ kiểm tra, nên
-  màu xanh đậm / vàng kem trong bản này là màu ước lượng theo thị giác,
-  không phải mã hex gốc đã xác thực. Font dùng Be Vietnam Pro (sans-serif,
-  hỗ trợ tiếng Việt) để gần với cảm giác gốc.
-- Hành vi mobile chưa được kiểm tra trên trang gốc; bản này dùng bố cục
-  1 cột dưới 800px và vẫn giữ thanh sticky.
-- URL ảnh kết quả học viên, ảnh bình luận cảm nhận và 10 video mẫu ẩn
-  chưa trích xuất được, nên các ô đó đang là placeholder — thay bằng
-  file ảnh gốc của bạn khi host chính thức.
+Backend đọc chuỗi kết nối theo thứ tự:
 
-## Ảnh: đang trỏ tới trang gốc của bạn
+1. `DATABASE_URL`
+2. `POSTGRES_URL`
 
-`index.html` hiện trỏ trực tiếp tới
-`https://co-nga-khoa-hoc-reels-tu-dong.nganguyendatxanh168.chatgpt.site/assets/...`
-để preview giống bản gốc ngay. Khi host chính thức, copy toàn bộ ảnh
-đó về `assets/` của bản này và đổi `src` thành đường dẫn tương đối,
-tránh phụ thuộc vào domain gốc.
+Ngoài ra cần:
 
-## Deploy
+- `RATE_LIMIT_SALT`: chuỗi ngẫu nhiên riêng dùng để HMAC địa chỉ IP trước khi
+  lưu khóa rate limit. Không lưu IP thô.
 
-Đây là trang tĩnh, không cần backend. Host bằng Netlify Drop /
-Cloudflare Pages / Vercel / GitHub Pages, thư mục publish là thư mục
-chứa `index.html` này, rồi trỏ domain riêng của bạn vào host đó.
+Kiểm tra tên biến đã được Neon thêm trên Vercel:
+
+```bash
+vercel env ls
+```
+
+Tạo salt và thêm vào Production, Preview, Development theo nhu cầu:
+
+```bash
+openssl rand -hex 32
+vercel env add RATE_LIMIT_SALT production
+```
+
+Không đưa giá trị thật vào `.env.example`. `.env*`, `.vercel/` và
+`node_modules/` đã được loại khỏi Git.
+
+## Khởi tạo database
+
+Mở Neon **SQL Editor** của resource `nya-chi-registrations`, xem kỹ rồi chạy
+nội dung `db/schema.sql`. Migration tạo:
+
+- `registrations(id, full_name, phone, email, created_at)`;
+- unique index cho số điện thoại đã chuẩn hóa;
+- bảng rate limit chứa hash HMAC, không chứa IP thô.
+
+Nếu bảng `registrations` đã có dữ liệu, kiểm tra và xử lý bản ghi trùng trước
+khi chạy unique index.
+
+## Chạy local bằng Vercel CLI
+
+Yêu cầu Node.js 22+ và Vercel CLI:
+
+```bash
+npm install
+vercel link
+vercel env pull .env.local
+vercel dev
+```
+
+Mở URL do `vercel dev` cung cấp. Không chạy bằng một static server đơn thuần
+nếu cần kiểm thử `/api/register`.
+
+Kiểm tra mã nguồn và unit test:
+
+```bash
+npm run check
+npm test
+```
+
+## Các tình huống cần kiểm thử
+
+- Payload thiếu/sai định dạng: API trả `422 VALIDATION_ERROR`.
+- Cùng một số nhập dạng `091...` và `+8491...`: lần sau trả
+  `409 DUPLICATE_PHONE`.
+- Bản ghi thứ 601: trả `409 CAPACITY_FULL`.
+- Ngày giờ hiển thị trên Landing Page chỉ là nội dung marketing; API vẫn tiếp
+  nhận đăng ký sau thời điểm đó nếu còn suất và dữ liệu hợp lệ.
+- Quá 5 request trong 10 phút từ cùng một IP hash: trả `429 RATE_LIMITED`.
+- Database gián đoạn: trả `503 DATABASE_UNAVAILABLE`; frontend giữ dữ liệu để
+  người dùng thử lại.
+- Mất mạng: frontend hiển thị lỗi kết nối và không xóa dữ liệu đã nhập.
+
+Không tạo 600 bản ghi thử trên database Production. Dùng Neon branch/database
+thử nghiệm nếu cần kiểm thử tích hợp giới hạn suất và concurrency.
+
+## Xác nhận dữ liệu trong Neon
+
+Sau khi gửi một đăng ký thử có chủ đích, mở **Neon Data Editor** hoặc
+**SQL Editor** và chạy:
+
+```sql
+SELECT id, full_name, phone, email, created_at
+FROM registrations
+ORDER BY created_at DESC
+LIMIT 20;
+```
+
+Kiểm tra tổng số suất:
+
+```sql
+SELECT COUNT(*) AS registration_count FROM registrations;
+```
+
+Các truy vấn trên hiển thị dữ liệu cá nhân; chỉ thực hiện trong Neon console
+được cấp quyền và không sao chép dữ liệu vào log công khai.
+
+## Bảo đảm concurrency
+
+API mở transaction, lấy `pg_advisory_xact_lock`, rồi mới kiểm tra số điện thoại
+trùng và `COUNT(*)`. Chỉ sau đó mới insert và commit. Vì mọi request đăng ký
+dùng cùng lock, hai request đồng thời không thể cùng nhìn thấy 599 suất rồi
+cùng tạo suất thứ 600/601.
+
+Backend không kiểm tra deadline. Ngày giờ trên Landing Page là nội dung
+marketing tĩnh và không khóa form, ẩn CTA hoặc thay đổi khả năng tiếp nhận của
+API.

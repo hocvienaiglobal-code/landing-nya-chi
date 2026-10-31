@@ -1,6 +1,11 @@
 .DS_Store
 .vercel/
 .env*
+!.env.example
+node_modules/
+/public/
+npm-debug.log*
 intake.md
 /audit/
 /backups/
+.vercel

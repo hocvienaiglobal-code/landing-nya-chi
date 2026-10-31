@@ -52,7 +52,7 @@
     .registration-availability{display:grid;gap:5px;padding:12px 15px;border:1px solid rgb(251 191 36/.24);border-radius:16px;background:linear-gradient(120deg,rgb(251 191 36/.08),rgb(34 211 238/.055));box-shadow:inset 0 1px rgb(255 255 255/.04)}
     .registration-availability p{display:flex;align-items:flex-start;gap:8px;margin:0;color:var(--muted);font-size:12px;line-height:1.5}
     .registration-availability .availability-icon{flex:0 0 auto}.registration-availability strong{color:var(--gold);font-weight:900}.registration-availability [hidden]{display:none}
-    .hero-availability{max-width:620px;margin:-4px 0 17px}.final-availability{max-width:650px;margin:0 auto 22px;text-align:left}.registration-availability.is-closed{place-items:center;border-color:rgb(251 191 36/.32);background:rgb(251 191 36/.08)}.registration-availability.is-closed p{color:var(--gold);text-align:center}
+    .hero-availability{max-width:620px;margin:-4px 0 17px}.final-availability{max-width:650px;margin:0 auto 22px;text-align:left}
     @media(max-width:680px){
       #van-de.section,#loi-ich.section,#doi-tuong.section{padding-block:58px}
       #van-de .section-head,#loi-ich .section-head,#doi-tuong .section-head{margin-bottom:32px}
@@ -118,6 +118,8 @@
     }
     @media(max-width:390px){.hero h1{font-size:clamp(31px,9.7vw,38px)}}
     @media(max-width:340px){.hero h1{font-size:30px}}
+    .registration-submit:disabled{cursor:wait;opacity:.72;transform:none;box-shadow:0 10px 28px -18px rgb(240 90 24/.7)}
+    .registration-submit:disabled:after{animation:none}.form-status.is-success{color:#86efac}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.marquee-track{transform:none}.marquee{overflow-x:auto}.marquee-group[aria-hidden=true]{display:none}}
   </style>
 </head>
@@ -131,7 +133,7 @@
   <main>
     <!-- 02. HERO -->
     <section class="hero grid-bg aurora" id="top"><div class="stars"></div><div class="particles"></div><div class="container hero-grid">
-      <div class="hero-copy reveal"><span class="hero-badge"><img src="assets/icons/premium.svg" alt="">Lần đầu tiên và duy nhất</span><h1><span>XÂY KÊNH TRIỆU</span><span class="hero-gold">VIEW BẰNG AI</span></h1><p class="hero-tagline">Nữ Hoàng AI – Nya Chi trực tiếp hướng dẫn hoàn toàn miễn phí</p><p class="hero-lead">Khám phá cách tạo video AI siêu nhanh, xây dựng hệ thống nội dung và phát triển kênh bán hàng mà không cần biết quay dựng chuyên nghiệp.</p><div class="offer-box"><div class="offer-value"><span>Khóa học trị giá</span><del>5.000.000Đ</del></div><div class="offer-free"><span>Hôm nay</span><strong>0Đ</strong></div></div><div class="registration-availability hero-availability" data-registration-availability role="status" aria-live="polite"><p data-registration-open><span class="availability-icon" aria-hidden="true">🔥</span><span>Chỉ dành cho <strong data-total-seats>600</strong> học viên đăng ký sớm nhất.</span></p><p data-registration-open><span class="availability-icon" aria-hidden="true">⏰</span><span>Đóng đăng ký vào <strong data-registration-deadline>20:00 ngày 31/10/2026</strong> hoặc khi đủ số lượng.</span></p><p data-registration-ended hidden><span class="availability-icon" aria-hidden="true">⏰</span><strong>Thời gian đăng ký đã kết thúc</strong></p></div><ul class="hero-points"><li><img src="assets/icons/check.svg" alt="">Không cần giỏi công nghệ</li><li><img src="assets/icons/check.svg" alt="">Không cần xuất hiện trước máy quay</li><li><img src="assets/icons/check.svg" alt="">Không cần mất hàng giờ làm video</li></ul><div class="hero-actions"><a class="btn btn-primary" href="#dang-ky"><img src="assets/icons/rocket.svg" alt="">Đăng ký ngay</a><span class="reg-note"><strong>Học miễn phí 0Đ</strong><br>Điền form đăng ký trực tiếp</span></div></div>
+      <div class="hero-copy reveal"><span class="hero-badge"><img src="assets/icons/premium.svg" alt="">Lần đầu tiên và duy nhất</span><h1><span>XÂY KÊNH TRIỆU</span><span class="hero-gold">VIEW BẰNG AI</span></h1><p class="hero-tagline">Nữ Hoàng AI – Nya Chi trực tiếp hướng dẫn hoàn toàn miễn phí</p><p class="hero-lead">Khám phá cách tạo video AI siêu nhanh, xây dựng hệ thống nội dung và phát triển kênh bán hàng mà không cần biết quay dựng chuyên nghiệp.</p><div class="offer-box"><div class="offer-value"><span>Khóa học trị giá</span><del>5.000.000Đ</del></div><div class="offer-free"><span>Hôm nay</span><strong>0Đ</strong></div></div><div class="registration-availability hero-availability" role="status" aria-live="polite"><p><span class="availability-icon" aria-hidden="true">🔥</span><span>Chỉ dành cho <strong>600</strong> học viên đăng ký sớm nhất.</span></p><p><span class="availability-icon" aria-hidden="true">⏰</span><span>Đóng đăng ký vào <strong>20:00 ngày 31/10/2026</strong> hoặc khi đủ số lượng.</span></p></div><ul class="hero-points"><li><img src="assets/icons/check.svg" alt="">Không cần giỏi công nghệ</li><li><img src="assets/icons/check.svg" alt="">Không cần xuất hiện trước máy quay</li><li><img src="assets/icons/check.svg" alt="">Không cần mất hàng giờ làm video</li></ul><div class="hero-actions"><a class="btn btn-primary" href="#dang-ky"><img src="assets/icons/rocket.svg" alt="">Đăng ký ngay</a><span class="reg-note"><strong>Học miễn phí 0Đ</strong><br>Điền form đăng ký trực tiếp</span></div></div>
       <div class="hero-visual reveal d1"><div class="portrait-halo"></div><figure class="portrait-frame"><img src="assets/giang-vien/Nya-Chi-1.jpg" alt="Nữ Hoàng AI – Nya Chi" width="1024" height="1280" fetchpriority="high"></figure><div class="hero-signature"><strong>NỮ HOÀNG AI – NYA CHI</strong><span>Tổng Giám đốc Học viện AI Global</span></div></div>
     </div></section>
 
@@ -164,32 +166,83 @@
     <section class="section grid-bg aurora" id="uu-dai"><div class="container"><div class="offer-panel reveal"><div class="offer-copy"><span class="eyebrow">Giá trị chương trình</span><h2>KHÓA HỌC TRỊ GIÁ 5.000.000Đ</h2><h3>NHƯNG HÔM NAY, BẠN ĐƯỢC HỌC VỚI GIÁ 0Đ</h3><p>Đây là nội dung Nya Chi đang trực tiếp đào tạo cho học viên.</p><p>Nhưng lần đầu tiên và duy nhất, chị quyết định mở chương trình này hoàn toàn miễn phí với mong muốn:</p><p><strong>Giúp người bình thường cũng có thể làm chủ AI, tự tạo nội dung và mở ra những cơ hội mới cho chính mình.</strong></p><div class="plain-lines"><strong>Bạn không cần đóng học phí.</strong><strong>Bạn chỉ cần đăng ký và sẵn sàng thực hành.</strong></div></div><div class="price-stage"><span>Giá trị khóa học</span><del class="price-old">5.000.000Đ</del><span>Học phí hôm nay</span><strong class="price-free">0Đ</strong><a class="btn btn-primary" href="#dang-ky">Đăng ký ngay</a></div></div></div></section>
 
     <!-- 09. REGISTRATION FORM -->
-    <section class="section registration-section grid-bg aurora" id="dang-ky"><div class="container"><div class="section-head reveal"><span class="eyebrow">ĐĂNG KÝ HỌC MIỄN PHÍ</span><h2>GIỮ SUẤT HỌC MIỄN PHÍ <span class="gradient">CỦA BẠN</span></h2><p>Điền thông tin để đăng ký tham gia chương trình “XÂY KÊNH TRIỆU VIEW BẰNG AI” cùng Nữ Hoàng AI – Nya Chi.</p></div><div class="registration-shell reveal"><form class="registration-form" id="registration-form" novalidate><div class="form-grid"><div class="form-field"><label for="fullName">Họ và tên <span class="required-mark" aria-hidden="true">*</span></label><input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Nhập họ và tên của bạn" required aria-describedby="fullName-error"><span class="field-error" id="fullName-error" aria-live="polite"></span></div><div class="form-field"><label for="phone">Số điện thoại <span class="required-mark" aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Nhập số điện thoại" required aria-describedby="phone-error"><span class="field-error" id="phone-error" aria-live="polite"></span></div><div class="form-field form-field-email"><label for="email">Email <span class="required-mark" aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="Nhập email của bạn" required aria-describedby="email-error"><span class="field-error" id="email-error" aria-live="polite"></span></div></div><p class="form-privacy"><img src="assets/icons/shield.svg" alt=""><span>Thông tin bạn nhập chỉ nhằm mục đích đăng ký chương trình. Hiện hệ thống tiếp nhận chưa được kết nối và dữ liệu chưa được gửi đi.</span></p><button class="btn btn-primary registration-submit" type="submit">ĐĂNG KÝ HỌC MIỄN PHÍ NGAY</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></form></div></div></section>
+    <section class="section registration-section grid-bg aurora" id="dang-ky">
+      <div class="container">
+        <div class="section-head reveal"><span class="eyebrow">ĐĂNG KÝ HỌC MIỄN PHÍ</span><h2>GIỮ SUẤT HỌC MIỄN PHÍ <span class="gradient">CỦA BẠN</span></h2><p>Điền thông tin để đăng ký tham gia chương trình “XÂY KÊNH TRIỆU VIEW BẰNG AI” cùng Nữ Hoàng AI – Nya Chi.</p></div>
+        <div class="registration-shell reveal">
+          <form class="registration-form" id="registration-form" novalidate>
+            <div class="form-grid">
+              <div class="form-field"><label for="fullName">Họ và tên <span class="required-mark" aria-hidden="true">*</span></label><input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Nhập họ và tên của bạn" required aria-describedby="fullName-error"><span class="field-error" id="fullName-error" aria-live="polite"></span></div>
+              <div class="form-field"><label for="phone">Số điện thoại <span class="required-mark" aria-hidden="true">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Nhập số điện thoại" required aria-describedby="phone-error"><span class="field-error" id="phone-error" aria-live="polite"></span></div>
+              <div class="form-field form-field-email"><label for="email">Email <span class="required-mark" aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="Nhập email của bạn" required aria-describedby="email-error"><span class="field-error" id="email-error" aria-live="polite"></span></div>
+            </div>
+            <p class="form-privacy"><img src="assets/icons/shield.svg" alt=""><span>Thông tin được sử dụng để tiếp nhận và xác nhận đăng ký chương trình. Dữ liệu chỉ được gửi khi bạn chủ động bấm nút đăng ký.</span></p>
+            <button class="btn btn-primary registration-submit" type="submit">ĐĂNG KÝ HỌC MIỄN PHÍ NGAY</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
 
     <!-- 10. FINAL CTA -->
-    <section class="section final-cta aurora" id="bat-dau"><div class="container"><div class="final-panel reveal"><span class="eyebrow">Bắt đầu từ hôm nay</span><h2>BẠN KHÔNG CẦN PHẢI THẬT GIỎI MỚI <span class="gradient">BẮT ĐẦU</span></h2><p class="final-sub">Nhưng bạn cần bắt đầu để có thể trở nên giỏi hơn.</p><p class="final-copy">Trong khi nhiều người vẫn đang mất hàng giờ để quay và dựng từng video, bạn có thể học cách sử dụng AI để rút ngắn quy trình và mở rộng khả năng sản xuất nội dung.</p><div class="final-insight"><div>Video là tài sản bán hàng có thể hoạt động mỗi ngày.</div><div>Người ứng dụng AI sớm sẽ có thêm lợi thế trong cuộc đua thu hút khách hàng.</div></div><div class="registration-availability final-availability" data-registration-availability role="status" aria-live="polite"><p data-registration-open><span class="availability-icon" aria-hidden="true">🔥</span><span><strong data-total-seats>600</strong> suất học miễn phí.</span></p><p data-registration-open><span class="availability-icon" aria-hidden="true">⏰</span><span>Đóng đăng ký: <strong data-registration-deadline>20:00 ngày 31/10/2026</strong>.</span></p><p data-registration-ended hidden><span class="availability-icon" aria-hidden="true">⏰</span><strong>Thời gian đăng ký đã kết thúc</strong></p></div><a class="btn btn-primary final-primary" href="#dang-ky"><img src="assets/icons/rocket.svg" alt="">Đăng ký ngay</a><p class="reg-note"><strong>Học miễn phí 0Đ</strong> · Điền form đăng ký trực tiếp</p></div></div></section>
+    <section class="section final-cta aurora" id="bat-dau"><div class="container"><div class="final-panel reveal"><span class="eyebrow">Bắt đầu từ hôm nay</span><h2>BẠN KHÔNG CẦN PHẢI THẬT GIỎI MỚI <span class="gradient">BẮT ĐẦU</span></h2><p class="final-sub">Nhưng bạn cần bắt đầu để có thể trở nên giỏi hơn.</p><p class="final-copy">Trong khi nhiều người vẫn đang mất hàng giờ để quay và dựng từng video, bạn có thể học cách sử dụng AI để rút ngắn quy trình và mở rộng khả năng sản xuất nội dung.</p><div class="final-insight"><div>Video là tài sản bán hàng có thể hoạt động mỗi ngày.</div><div>Người ứng dụng AI sớm sẽ có thêm lợi thế trong cuộc đua thu hút khách hàng.</div></div><div class="registration-availability final-availability" role="status" aria-live="polite"><p><span class="availability-icon" aria-hidden="true">🔥</span><span><strong>600</strong> suất học miễn phí.</span></p><p><span class="availability-icon" aria-hidden="true">⏰</span><span>Đóng đăng ký: <strong>20:00 ngày 31/10/2026</strong>.</span></p></div><a class="btn btn-primary final-primary" href="#dang-ky"><img src="assets/icons/rocket.svg" alt="">Đăng ký ngay</a><p class="reg-note"><strong>Học miễn phí 0Đ</strong> · Điền form đăng ký trực tiếp</p></div></div></section>
   </main>
 
   <!-- 10. FOOTER -->
   <footer class="site-footer"><div class="container"><div class="footer-main"><a class="brand" href="#top"><span class="brand-mark">AI</span><span class="brand-copy">HỌC VIỆN AI GLOBAL<small>NYA CHI</small></span></a><p class="footer-copy"><strong>Mang AI đến triệu người – Kiến tạo triệu cơ hội.</strong>Xây Kênh Triệu View Bằng AI cùng Nữ Hoàng AI – Nya Chi.</p></div><div class="footer-bottom">© <span id="year">2026</span> Học viện AI Global.</div></div></footer>
   <div class="mobile-sticky"><a class="btn btn-primary" href="#dang-ky">Đăng ký ngay</a></div>
   <script>
-    /* Official registration availability: presentation only, not backend enforcement. */
-    const totalSeats=600;
-    const registrationDeadline="2026-10-31T20:00:00+07:00";
-    const registrationDeadlineLabel="20:00 ngày 31/10/2026";
-    const registrationDeadlineTime=Date.parse(registrationDeadline);
-    const renderRegistrationAvailability=(now=Date.now())=>{const isClosed=now>=registrationDeadlineTime;document.querySelectorAll("[data-total-seats]").forEach(node=>node.textContent=String(totalSeats));document.querySelectorAll("[data-registration-deadline]").forEach(node=>node.textContent=registrationDeadlineLabel);document.querySelectorAll("[data-registration-availability]").forEach(block=>{block.classList.toggle("is-closed",isClosed);block.querySelectorAll("[data-registration-open]").forEach(node=>node.hidden=isClosed);block.querySelector("[data-registration-ended]").hidden=!isClosed})};
-    const scheduleRegistrationState=()=>{renderRegistrationAvailability();const remaining=registrationDeadlineTime-Date.now();if(remaining>0)window.setTimeout(scheduleRegistrationState,Math.min(remaining+100,2147483647))};scheduleRegistrationState();
     const toggle=document.querySelector(".menu-toggle"),menu=document.querySelector(".mobile-menu");const closeMenu=()=>{toggle.setAttribute("aria-expanded","false");toggle.setAttribute("aria-label","Mở menu");menu.classList.remove("open");document.body.classList.remove("menu-open")};toggle.addEventListener("click",()=>{const open=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",String(!open));toggle.setAttribute("aria-label",open?"Mở menu":"Đóng menu");menu.classList.toggle("open",!open);document.body.classList.toggle("menu-open",!open)});menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
     const reveals=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");ob.unobserve(e.target)}}),{threshold:.08,rootMargin:"0px 0px -5%"});reveals.forEach(e=>ob.observe(e))}else reveals.forEach(e=>e.classList.add("visible"));
     const stars=document.querySelector(".stars"),particles=document.querySelector(".particles");if(!matchMedia("(prefers-reduced-motion:reduce)").matches){for(let i=0;i<18;i++){const s=document.createElement("span");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*4+"s";stars.append(s)}for(let i=0;i<10;i++){const p=document.createElement("span");p.className="particle";p.style.setProperty("--size",2+Math.random()*4+"px");p.style.setProperty("--color",i%3===0?"#a78bfa":i%2===0?"#fbbf24":"#22d3ee");p.style.setProperty("--duration",10+Math.random()*9+"s");p.style.setProperty("--delay",-Math.random()*14+"s");p.style.left=Math.random()*100+"%";particles.append(p)}}
-    /* Registration form: client-side validation only; no data is sent or stored. */
-    const registrationSection=document.getElementById("dang-ky"),registrationForm=document.getElementById("registration-form"),formStatus=document.getElementById("form-status");
+    /* Registration form: validate locally, then persist through POST /api/register. */
+    const registrationSection=document.getElementById("dang-ky"),registrationForm=document.getElementById("registration-form"),formStatus=document.getElementById("form-status"),registrationSubmit=document.querySelector(".registration-submit");
     const registrationFields={fullName:{input:document.getElementById("fullName"),error:document.getElementById("fullName-error")},phone:{input:document.getElementById("phone"),error:document.getElementById("phone-error")},email:{input:document.getElementById("email"),error:document.getElementById("email-error")}};
     const setFieldError=(field,message)=>{field.error.textContent=message;field.input.setAttribute("aria-invalid",message?"true":"false")};
-    Object.values(registrationFields).forEach(field=>field.input.addEventListener("input",()=>{setFieldError(field,"");formStatus.textContent="";formStatus.classList.remove("is-error")}));
-    registrationForm.addEventListener("submit",event=>{event.preventDefault();const fullName=registrationFields.fullName.input.value.trim(),email=registrationFields.email.input.value.trim(),rawPhone=registrationFields.phone.input.value.trim(),normalizedPhone=rawPhone.replace(/[\s().-]/g,"");registrationFields.fullName.input.value=fullName;registrationFields.email.input.value=email;Object.values(registrationFields).forEach(field=>setFieldError(field,""));let firstInvalid=null;if(!fullName){setFieldError(registrationFields.fullName,"Vui lòng nhập họ và tên.");firstInvalid=registrationFields.fullName.input}if(!/^(?:\+84|84|0)(?:3|5|7|8|9)\d{8}$/.test(normalizedPhone)){setFieldError(registrationFields.phone,"Vui lòng nhập số điện thoại Việt Nam hợp lệ.");if(!firstInvalid)firstInvalid=registrationFields.phone.input}if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){setFieldError(registrationFields.email,"Vui lòng nhập địa chỉ email hợp lệ.");if(!firstInvalid)firstInvalid=registrationFields.email.input}if(firstInvalid){formStatus.textContent="Vui lòng kiểm tra lại các trường được đánh dấu.";formStatus.classList.add("is-error");firstInvalid.focus();return}formStatus.classList.remove("is-error");formStatus.textContent="Thông tin đã hợp lệ, nhưng hệ thống tiếp nhận đăng ký chưa được kết nối. Dữ liệu của bạn chưa được gửi hoặc lưu."});
+    const setFormStatus=(message,type="")=>{formStatus.textContent=message;formStatus.classList.toggle("is-error",type==="error");formStatus.classList.toggle("is-success",type==="success")};
+    Object.values(registrationFields).forEach(field=>field.input.addEventListener("input",()=>{setFieldError(field,"");setFormStatus("")}));
+    registrationForm.addEventListener("submit",async event=>{
+      event.preventDefault();
+      if(registrationSubmit.disabled)return;
+
+      const fullName=registrationFields.fullName.input.value.trim().replace(/\s+/g," "),email=registrationFields.email.input.value.trim(),rawPhone=registrationFields.phone.input.value.trim(),normalizedPhone=rawPhone.replace(/[\s().-]/g,"");
+      registrationFields.fullName.input.value=fullName;registrationFields.email.input.value=email;
+      Object.values(registrationFields).forEach(field=>setFieldError(field,""));
+
+      let firstInvalid=null;
+      if(!fullName){setFieldError(registrationFields.fullName,"Vui lòng nhập họ và tên.");firstInvalid=registrationFields.fullName.input}
+      if(!/^(?:\+84|84|0)(?:3|5|7|8|9)\d{8}$/.test(normalizedPhone)){setFieldError(registrationFields.phone,"Vui lòng nhập số điện thoại Việt Nam hợp lệ.");if(!firstInvalid)firstInvalid=registrationFields.phone.input}
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){setFieldError(registrationFields.email,"Vui lòng nhập địa chỉ email hợp lệ.");if(!firstInvalid)firstInvalid=registrationFields.email.input}
+      if(firstInvalid){setFormStatus("Vui lòng kiểm tra lại các trường được đánh dấu.","error");firstInvalid.focus();return}
+
+      const submitLabel=registrationSubmit.textContent;
+      const controller=new AbortController();
+      const timeoutId=window.setTimeout(()=>controller.abort(),12000);
+      registrationSubmit.disabled=true;registrationSubmit.setAttribute("aria-busy","true");registrationSubmit.textContent="ĐANG GỬI...";
+      setFormStatus("Đang gửi thông tin đăng ký...");
+
+      try{
+        const response=await fetch("/api/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({fullName,phone:rawPhone,email}),signal:controller.signal});
+        let data={};
+        try{data=await response.json()}catch{}
+
+        if(response.ok&&data.code==="REGISTERED"){
+          registrationForm.reset();Object.values(registrationFields).forEach(field=>setFieldError(field,""));
+          setFormStatus(data.message||"Đăng ký thành công. Thông tin của bạn đã được lưu.","success");
+          return;
+        }
+
+        if(data.code==="VALIDATION_ERROR"&&data.fields){
+          Object.entries(data.fields).forEach(([name,message])=>{if(registrationFields[name])setFieldError(registrationFields[name],message)});
+        }
+        const fallbackMessages={DUPLICATE_PHONE:"Số điện thoại này đã được đăng ký.",CAPACITY_FULL:"Chương trình đã đủ 600 suất đăng ký.",RATE_LIMITED:"Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau ít phút.",DATABASE_UNAVAILABLE:"Hệ thống đăng ký đang tạm thời gián đoạn. Vui lòng thử lại sau.",CONFIGURATION_ERROR:"Hệ thống đăng ký chưa được cấu hình đầy đủ. Vui lòng thử lại sau."};
+        setFormStatus(data.message||fallbackMessages[data.code]||"Không thể hoàn tất đăng ký. Vui lòng thử lại.","error");
+      }catch(error){
+        setFormStatus(error.name==="AbortError"?"Kết nối quá thời gian chờ. Vui lòng thử lại.":"Không thể kết nối tới hệ thống đăng ký. Vui lòng kiểm tra mạng và thử lại.","error");
+      }finally{
+        window.clearTimeout(timeoutId);registrationSubmit.disabled=false;registrationSubmit.removeAttribute("aria-busy");registrationSubmit.textContent=submitLabel;
+      }
+    });
     registrationForm.addEventListener("focusin",()=>document.body.classList.add("form-active"));registrationForm.addEventListener("focusout",()=>setTimeout(()=>{if(!registrationForm.contains(document.activeElement))document.body.classList.remove("form-active")},0));
     if("IntersectionObserver"in window){const formObserver=new IntersectionObserver(entries=>entries.forEach(entry=>document.body.classList.toggle("form-in-view",entry.isIntersecting)),{threshold:.08});formObserver.observe(registrationSection)}
     document.getElementById("year").textContent=new Date().getFullYear();
