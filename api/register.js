@@ -122,7 +122,7 @@ export async function handleRegister(request, overrides = {}) {
     return json({
       ok: true,
       code: "REGISTERED",
-      message: "Đăng ký thành công. Thông tin của bạn đã được lưu.",
+      message: "Đăng ký thành công! Thông tin của bạn đã được ghi nhận.",
     }, 201);
   } catch {
     return json({
