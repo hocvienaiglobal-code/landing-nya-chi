@@ -124,6 +124,7 @@
     @media(max-width:900px){.proof-grid.channel-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:680px){.proof-grid.channel-grid{grid-template-columns:1fr}}
     .offer-free strong{font-size:clamp(18px,2.2vw,28px);letter-spacing:-.025em;white-space:nowrap}.price-free{font-size:clamp(28px,4vw,48px);letter-spacing:-.035em;white-space:nowrap}
+    [hidden]{display:none!important}.registration-success{text-align:center;max-width:680px;margin:auto}.success-icon{display:grid;place-items:center;width:76px;height:76px;margin:0 auto 22px;border:1px solid var(--cyan);border-radius:50%;background:rgb(34 211 238/.1);color:var(--cyan);font-size:38px;box-shadow:0 0 40px -14px var(--cyan)}.registration-success h3{color:var(--gold);font-size:clamp(23px,4vw,34px);line-height:1.4}.registration-success p{color:var(--muted)}.registration-success .btn{width:100%;white-space:normal;line-height:1.6;padding:18px 22px;font-size:clamp(12px,2vw,15px)}.btn.zalo-cta{white-space:normal;line-height:1.45;min-width:0;overflow-wrap:anywhere}.btn[aria-disabled="true"]{opacity:.65;cursor:not-allowed}.registration-success:focus{outline:2px solid var(--cyan);outline-offset:8px}.registration-complete .mobile-sticky .btn{font-size:12px}.registration-complete .mobile-sticky .btn img{flex:0 0 18px;width:18px;height:18px}
     /* Compact the requested section headings without changing their layout. */
     .hero h1{font-size:clamp(36px,4.05vw,53px)}
     #van-de .section-head h2,
@@ -202,6 +203,13 @@
             <button class="btn btn-primary registration-submit" type="submit">ĐĂNG KÝ HỌC MIỄN PHÍ NGAY</button>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
+          <div class="registration-success" id="registration-success" hidden tabindex="-1" role="region" aria-labelledby="registration-success-title">
+            <span class="success-icon" aria-hidden="true">✓</span>
+            <h3 id="registration-success-title">ĐĂNG KÝ THÀNH CÔNG!</h3>
+            <p>Chúc mừng bạn đã đăng ký khóa học AI miễn phí. Hãy tham gia nhóm Zalo để nhận lịch học, thông báo và quà tặng từ Học Viện AI.</p>
+            <a class="btn btn-primary" id="success-zalo-cta" aria-disabled="true">VÀO NHÓM NHẬN LỊCH HỌC VÀ QUÀ TẶNG TỪ HỌC VIỆN AI</a>
+            <p id="zalo-unavailable" hidden>Đường dẫn nhóm Zalo đang được cập nhật. Vui lòng quay lại sau.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -219,13 +227,35 @@
     const stars=document.querySelector(".stars"),particles=document.querySelector(".particles");if(!matchMedia("(prefers-reduced-motion:reduce)").matches){for(let i=0;i<18;i++){const s=document.createElement("span");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*4+"s";stars.append(s)}for(let i=0;i<10;i++){const p=document.createElement("span");p.className="particle";p.style.setProperty("--size",2+Math.random()*4+"px");p.style.setProperty("--color",i%3===0?"#a78bfa":i%2===0?"#fbbf24":"#22d3ee");p.style.setProperty("--duration",10+Math.random()*9+"s");p.style.setProperty("--delay",-Math.random()*14+"s");p.style.left=Math.random()*100+"%";particles.append(p)}}
     /* Registration form: validate locally, then persist through POST /api/register. */
     const registrationSection=document.getElementById("dang-ky"),registrationForm=document.getElementById("registration-form"),formStatus=document.getElementById("form-status"),registrationSubmit=document.querySelector(".registration-submit");
+    /* Single group-link configuration. Leave empty to disable group navigation. */
+    const ZALO_GROUP_URL="https://zalo.me/g/6ffttwj0mgo9gfkap3a7";
+    const REGISTRATION_SESSION_KEY="nya-chi-registration-complete";
+    const registrationSuccess=document.getElementById("registration-success");
+    const registrationCTAs=[...document.querySelectorAll('a.btn[href="#dang-ky"]')];
+    function showRegistrationSuccess({focus=false}={}){
+      let groupUrl="";
+      try{const url=new URL(ZALO_GROUP_URL);if(url.protocol==="https:"&&url.hostname==="zalo.me"&&/^\/g\/[a-zA-Z0-9]+\/?$/.test(url.pathname)&&!url.username&&!url.password&&!url.port&&!url.search&&!url.hash)groupUrl=url.href}catch{}
+      registrationForm.hidden=true;
+      registrationSuccess.hidden=false;
+      registrationSection.querySelector(".section-head").hidden=true;
+      document.body.classList.remove("form-active");
+      document.body.classList.add("registration-complete");
+      registrationCTAs.forEach(cta=>{cta.textContent="Vào nhóm Zalo";cta.setAttribute("aria-label","Vào nhóm Zalo nhận lịch học và quà tặng từ Học Viện AI");cta.classList.add("zalo-cta")});
+      [...registrationCTAs,document.getElementById("success-zalo-cta")].forEach(cta=>{
+        if(groupUrl){cta.href=groupUrl;cta.target="_blank";cta.rel="noopener noreferrer";cta.removeAttribute("aria-disabled");cta.removeAttribute("tabindex")}
+        else{cta.removeAttribute("href");cta.removeAttribute("target");cta.removeAttribute("rel");cta.setAttribute("aria-disabled","true");cta.setAttribute("tabindex","-1")}
+      });
+      document.getElementById("zalo-unavailable").hidden=Boolean(groupUrl);
+      if(focus)registrationSuccess.focus();
+    }
+    try{if(sessionStorage.getItem(REGISTRATION_SESSION_KEY)==="true")showRegistrationSuccess()}catch{}
     const registrationFields={fullName:{input:document.getElementById("fullName"),error:document.getElementById("fullName-error")},phone:{input:document.getElementById("phone"),error:document.getElementById("phone-error")},email:{input:document.getElementById("email"),error:document.getElementById("email-error")}};
     const setFieldError=(field,message)=>{field.error.textContent=message;field.input.setAttribute("aria-invalid",message?"true":"false")};
     const setFormStatus=(message,type="")=>{formStatus.textContent=message;formStatus.classList.toggle("is-error",type==="error");formStatus.classList.toggle("is-success",type==="success")};
     Object.values(registrationFields).forEach(field=>field.input.addEventListener("input",()=>{setFieldError(field,"");setFormStatus("")}));
     registrationForm.addEventListener("submit",async event=>{
       event.preventDefault();
-      if(registrationSubmit.disabled)return;
+      if(registrationSubmit.disabled||registrationForm.hidden)return;
 
       const fullName=registrationFields.fullName.input.value.trim().replace(/\s+/g," "),email=registrationFields.email.input.value.trim(),rawPhone=registrationFields.phone.input.value.trim(),normalizedPhone=rawPhone.replace(/[\s().-]/g,"");
       registrationFields.fullName.input.value=fullName;registrationFields.email.input.value=email;
@@ -248,9 +278,10 @@
         let data={};
         try{data=await response.json()}catch{}
 
-        if(response.ok&&data.code==="REGISTERED"){
+        if(response.status===201&&data.code==="REGISTERED"){
           registrationForm.reset();Object.values(registrationFields).forEach(field=>setFieldError(field,""));
-          setFormStatus(data.message||"Đăng ký thành công! Thông tin của bạn đã được ghi nhận.","success");
+          try{sessionStorage.setItem(REGISTRATION_SESSION_KEY,"true")}catch{}
+          showRegistrationSuccess({focus:true});
           return;
         }
 
