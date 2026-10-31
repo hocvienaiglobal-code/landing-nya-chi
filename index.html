@@ -229,10 +229,11 @@
     const registrationSection=document.getElementById("dang-ky"),registrationForm=document.getElementById("registration-form"),formStatus=document.getElementById("form-status"),registrationSubmit=document.querySelector(".registration-submit");
     /* Single group-link configuration. Leave empty to disable group navigation. */
     const ZALO_GROUP_URL="https://zalo.me/g/6ffttwj0mgo9gfkap3a7";
-    const REGISTRATION_SESSION_KEY="nya-chi-registration-complete";
+    let registrationComplete=false;
     const registrationSuccess=document.getElementById("registration-success");
     const registrationCTAs=[...document.querySelectorAll('a.btn[href="#dang-ky"]')];
     function showRegistrationSuccess({focus=false}={}){
+      registrationComplete=true;
       let groupUrl="";
       try{const url=new URL(ZALO_GROUP_URL);if(url.protocol==="https:"&&url.hostname==="zalo.me"&&/^\/g\/[a-zA-Z0-9]+\/?$/.test(url.pathname)&&!url.username&&!url.password&&!url.port&&!url.search&&!url.hash)groupUrl=url.href}catch{}
       registrationForm.hidden=true;
@@ -248,14 +249,13 @@
       document.getElementById("zalo-unavailable").hidden=Boolean(groupUrl);
       if(focus)registrationSuccess.focus();
     }
-    try{if(sessionStorage.getItem(REGISTRATION_SESSION_KEY)==="true")showRegistrationSuccess()}catch{}
     const registrationFields={fullName:{input:document.getElementById("fullName"),error:document.getElementById("fullName-error")},phone:{input:document.getElementById("phone"),error:document.getElementById("phone-error")},email:{input:document.getElementById("email"),error:document.getElementById("email-error")}};
     const setFieldError=(field,message)=>{field.error.textContent=message;field.input.setAttribute("aria-invalid",message?"true":"false")};
     const setFormStatus=(message,type="")=>{formStatus.textContent=message;formStatus.classList.toggle("is-error",type==="error");formStatus.classList.toggle("is-success",type==="success")};
     Object.values(registrationFields).forEach(field=>field.input.addEventListener("input",()=>{setFieldError(field,"");setFormStatus("")}));
     registrationForm.addEventListener("submit",async event=>{
       event.preventDefault();
-      if(registrationSubmit.disabled||registrationForm.hidden)return;
+      if(registrationSubmit.disabled||registrationComplete)return;
 
       const fullName=registrationFields.fullName.input.value.trim().replace(/\s+/g," "),email=registrationFields.email.input.value.trim(),rawPhone=registrationFields.phone.input.value.trim(),normalizedPhone=rawPhone.replace(/[\s().-]/g,"");
       registrationFields.fullName.input.value=fullName;registrationFields.email.input.value=email;
@@ -280,7 +280,6 @@
 
         if(response.status===201&&data.code==="REGISTERED"){
           registrationForm.reset();Object.values(registrationFields).forEach(field=>setFieldError(field,""));
-          try{sessionStorage.setItem(REGISTRATION_SESSION_KEY,"true")}catch{}
           showRegistrationSuccess({focus:true});
           return;
         }
