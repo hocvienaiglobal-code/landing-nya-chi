@@ -78,16 +78,17 @@ npm test
 - Payload thiếu/sai định dạng: API trả `422 VALIDATION_ERROR`.
 - Cùng một số nhập dạng `091...` và `+8491...`: lần sau trả
   `409 DUPLICATE_PHONE`.
-- Bản ghi thứ 601: trả `409 CAPACITY_FULL`.
+- API không giới hạn tổng số đăng ký; dữ liệu số suất hiển thị trên Landing Page
+  chỉ là nội dung marketing tĩnh.
 - Ngày giờ hiển thị trên Landing Page chỉ là nội dung marketing; API vẫn tiếp
-  nhận đăng ký sau thời điểm đó nếu còn suất và dữ liệu hợp lệ.
+  nhận đăng ký sau thời điểm đó khi dữ liệu hợp lệ.
 - Quá 5 request trong 10 phút từ cùng một IP hash: trả `429 RATE_LIMITED`.
 - Database gián đoạn: trả `503 DATABASE_UNAVAILABLE`; frontend giữ dữ liệu để
   người dùng thử lại.
 - Mất mạng: frontend hiển thị lỗi kết nối và không xóa dữ liệu đã nhập.
 
-Không tạo 600 bản ghi thử trên database Production. Dùng Neon branch/database
-thử nghiệm nếu cần kiểm thử tích hợp giới hạn suất và concurrency.
+Không dùng dữ liệu thật trên database Production. Dùng Neon branch/database
+thử nghiệm nếu cần kiểm thử tích hợp và concurrency.
 
 ## Xác nhận dữ liệu trong Neon
 
@@ -101,21 +102,14 @@ ORDER BY created_at DESC
 LIMIT 20;
 ```
 
-Kiểm tra tổng số suất:
-
-```sql
-SELECT COUNT(*) AS registration_count FROM registrations;
-```
-
 Các truy vấn trên hiển thị dữ liệu cá nhân; chỉ thực hiện trong Neon console
 được cấp quyền và không sao chép dữ liệu vào log công khai.
 
 ## Bảo đảm concurrency
 
-API mở transaction, lấy `pg_advisory_xact_lock`, rồi mới kiểm tra số điện thoại
-trùng và `COUNT(*)`. Chỉ sau đó mới insert và commit. Vì mọi request đăng ký
-dùng cùng lock, hai request đồng thời không thể cùng nhìn thấy 599 suất rồi
-cùng tạo suất thứ 600/601.
+API mở transaction, `INSERT` với `ON CONFLICT (phone) DO NOTHING`, rồi chỉ trả
+thành công sau `COMMIT`. Unique index của PostgreSQL là cơ chế chống trùng an
+toàn khi nhiều request cùng đăng ký một số điện thoại.
 
 Backend không kiểm tra deadline. Ngày giờ trên Landing Page là nội dung
 marketing tĩnh và không khóa form, ẩn CTA hoặc thay đổi khả năng tiếp nhận của

@@ -25,7 +25,7 @@ function request(payload = validPayload, options = {}) {
   });
 }
 
-const allowedRateLimit = async () => ({ allowed: true, retryAfter: 600 });
+const allowedRateLimit = async () => ({ allowed: true, retryAfter: 300 });
 
 async function responseBody(response) {
   return { status: response.status, body: await response.json() };
@@ -97,22 +97,17 @@ test("returns success only after the database workflow reports created", async (
   assert.equal(received.phone, "0912345678");
 });
 
-for (const [databaseStatus, httpStatus, code] of [
-  ["duplicate", 409, "DUPLICATE_PHONE"],
-  ["full", 409, "CAPACITY_FULL"],
-]) {
-  test(`maps ${databaseStatus} database state to ${code}`, async () => {
-    const response = await handleRegister(request(), {
-      pool: {},
-      rateLimitSalt: "test-salt",
-      enforceRateLimitFn: allowedRateLimit,
-      registerStudentFn: async () => ({ status: databaseStatus }),
-    });
-    const result = await responseBody(response);
-    assert.equal(result.status, httpStatus);
-    assert.equal(result.body.code, code);
+test("maps duplicate database state to DUPLICATE_PHONE", async () => {
+  const response = await handleRegister(request(), {
+    pool: {},
+    rateLimitSalt: "test-salt",
+    enforceRateLimitFn: allowedRateLimit,
+    registerStudentFn: async () => ({ status: "duplicate" }),
   });
-}
+  const result = await responseBody(response);
+  assert.equal(result.status, 409);
+  assert.equal(result.body.code, "DUPLICATE_PHONE");
+});
 
 test("returns 429 when the database-backed rate limit is exceeded", async () => {
   const response = await handleRegister(request(), {
@@ -140,17 +135,14 @@ test("returns a retryable service error without leaking database details", async
   assert.equal(JSON.stringify(result.body).includes("secret database detail"), false);
 });
 
-test("transaction acquires the capacity lock before checking count and inserting", async () => {
+test("transaction inserts and commits without a total-registration check or advisory lock", async () => {
   const queries = [];
   const client = {
     async query(sql, params = []) {
       const text = String(sql).replace(/\s+/gu, " ").trim();
       queries.push({ text, params });
-      if (text.startsWith("SELECT EXISTS")) {
-        return { rows: [{ is_duplicate: false, registration_count: 599 }] };
-      }
       if (text.startsWith("INSERT INTO registrations")) {
-        return { rowCount: 1, rows: [{ id: "600" }] };
+        return { rowCount: 1, rows: [{ id: "701" }] };
       }
       return { rowCount: 0, rows: [] };
     },
@@ -166,27 +158,21 @@ test("transaction acquires the capacity lock before checking count and inserting
 
   assert.equal(result.status, "created");
   assert.deepEqual(queries.map(query => query.text.split(" ")[0]), [
-    "BEGIN", "SELECT", "SELECT", "INSERT", "COMMIT",
+    "BEGIN", "INSERT", "COMMIT",
   ]);
-  assert.match(queries[1].text, /pg_advisory_xact_lock/u);
-  assert.match(queries[2].text, /COUNT\(\*\)/u);
-  assert.doesNotMatch(queries[2].text, /CURRENT_TIMESTAMP|deadline|timestamptz/iu);
-  assert.deepEqual(queries[2].params, ["0912345678"]);
-  assert.deepEqual(queries[3].params, ["Nguyễn Văn A", "0912345678", "test@example.com"]);
+  assert.doesNotMatch(queries[1].text, /pg_advisory_xact_lock|COUNT\(\*\)|deadline|CURRENT_TIMESTAMP|timestamptz/iu);
+  assert.deepEqual(queries[1].params, ["Nguyễn Văn A", "0912345678", "test@example.com"]);
 });
 
-test("accepts a valid registration after the marketing deadline when capacity remains", async () => {
+test("accepts a valid registration after the marketing deadline", async () => {
   const simulatedRequestTime = Date.parse("2026-11-01T09:00:00+07:00");
-  assert.ok(simulatedRequestTime > Date.parse("2026-10-31T20:00:00+07:00"));
+  assert.ok(simulatedRequestTime > Date.parse("2026-10-31T21:00:00+07:00"));
 
   const queries = [];
   const client = {
     async query(sql, params = []) {
       const text = String(sql).replace(/\s+/gu, " ").trim();
       queries.push({ text, params });
-      if (text.startsWith("SELECT EXISTS")) {
-        return { rows: [{ is_duplicate: false, registration_count: 10 }] };
-      }
       if (text.startsWith("INSERT INTO registrations")) {
         return { rowCount: 1, rows: [{ id: "11" }] };
       }
@@ -204,14 +190,15 @@ test("accepts a valid registration after the marketing deadline when capacity re
   assert.equal(queries.some(query => /deadline|CURRENT_TIMESTAMP|timestamptz/iu.test(query.text)), false);
 });
 
-test("transaction refuses the 601st registration", async () => {
+test("transaction does not enforce a total registration limit", async () => {
+  const queries = [];
   const client = {
-    async query(sql) {
+    async query(sql, params = []) {
       const text = String(sql).replace(/\s+/gu, " ").trim();
-      if (text.startsWith("SELECT EXISTS")) {
-        return { rows: [{ is_duplicate: false, registration_count: 600 }] };
+      queries.push({ text, params });
+      if (text.startsWith("INSERT INTO registrations")) {
+        return { rowCount: 1, rows: [{ id: "701" }] };
       }
-      if (text.startsWith("INSERT INTO registrations")) assert.fail("insert must not run");
       return { rowCount: 0, rows: [] };
     },
     release() {},
@@ -221,5 +208,28 @@ test("transaction refuses the 601st registration", async () => {
     phone: "0987654321",
     email: "b@example.com",
   });
-  assert.equal(result.status, "full");
+  assert.equal(result.status, "created");
+  assert.equal(queries.some(query => /COUNT\(\*\)|pg_advisory_xact_lock/iu.test(query.text)), false);
+});
+
+test("transaction rolls back when the phone number is already registered", async () => {
+  const queries = [];
+  const client = {
+    async query(sql) {
+      const text = String(sql).replace(/\s+/gu, " ").trim();
+      queries.push(text);
+      if (text.startsWith("INSERT INTO registrations")) {
+        return { rowCount: 0, rows: [] };
+      }
+      return { rowCount: 0, rows: [] };
+    },
+    release() {},
+  };
+  const result = await registerStudent({ async connect() { return client; } }, {
+    fullName: "Nguyễn Văn D",
+    phone: "0933333333",
+    email: "d@example.com",
+  });
+  assert.equal(result.status, "duplicate");
+  assert.deepEqual(queries.map(query => query.split(" ")[0]), ["BEGIN", "INSERT", "ROLLBACK"]);
 });

@@ -114,9 +114,6 @@ export async function handleRegister(request, overrides = {}) {
     if (result.status === "duplicate") {
       return json({ ok: false, code: "DUPLICATE_PHONE", message: "Số điện thoại này đã được đăng ký." }, 409);
     }
-    if (result.status === "full") {
-      return json({ ok: false, code: "CAPACITY_FULL", message: "Chương trình đã đủ 600 suất đăng ký." }, 409);
-    }
     if (result.status !== "created") throw new Error("Unexpected registration result");
 
     return json({
